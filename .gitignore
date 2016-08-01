@@ -1,0 +1,7 @@
+dist
+gulp-cache
+node_modules
+*.log
+*.map
+.DS_Store
+.tmp

@@ -1,0 +1,75 @@
+/**
+ * Base styles
+ *
+ * Opinionated defaults by Luke Harvey
+ */
+
+/**
+ * Enable font anti-aliasing in
+ * 1. Firefox
+ * 2. Chrome, Safari
+ */
+
+html {
+  -moz-osx-font-smoothing: grayscale; /* 1 */
+  -webkit-font-smoothing: antialiased; /* 2 */
+}
+
+body {
+  color: $colour-black;
+  display: flex;
+  flex-direction: column;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  min-height: 100vh;
+  text-rendering: auto;
+}
+
+/**
+ * Reset font-weight of heading elements
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: $font-weight-default;
+}
+
+/**
+ * Enable basic responsive image support
+ */
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+/**
+ * Ensure all 'a' elements have correct cursor style
+ */
+
+a {
+  color: inherit;
+  cursor: pointer;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+/* stylelint-disable selector-no-qualifying-type */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer; /* 2 */
+}
+
+/* stylelint-enable selector-no-qualifying-type */

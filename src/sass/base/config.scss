@@ -1,0 +1,58 @@
+/**
+ * Config
+ *
+ * All the variables used in the theme
+ */
+
+/**
+ * Colours
+ */
+
+$colour-black: #1b202f;
+$colour-grey: #7a7a7a;
+$colour-white: #fff;
+
+/**
+ * Font families
+ */
+
+$font-family-default: serif;
+$font-family-headings: monospace;
+
+/**
+ * Font sizes
+ */
+
+$font-size-small: 0.6875rem; /* 11px */
+$font-size-default: 1rem; /* 16px */
+$font-size-large: 1.5rem; /* 24px */
+
+/**
+ * Font weights
+ */
+
+$font-weight-default: 400;
+$font-weight-bold: 800;
+
+/**
+ * Letter spacing
+ */
+
+$letter-spacing-default: 0.1rem;
+
+/**
+ * Line-heights
+ */
+
+$line-height-default: 1.5;
+
+/**
+ * Breakpoints
+ */
+
+$viewport-smaller: 400px;
+$viewport-small: 480px;
+$viewport-medium: 720px;
+$viewport-large: 960px;
+$viewport-larger: 1200px;
+$viewport-xlarge: 1400px;
