@@ -19,14 +19,17 @@ body {
   color: $colour-black;
   display: flex;
   flex-direction: column;
+  font-family: $font-family-default;
   font-feature-settings: "kern" 1;
   font-kerning: normal;
+  font-weight: $font-weight-default;
+  line-height: $line-height-default;
   min-height: 100vh;
-  text-rendering: auto;
+  text-rendering: optimizeLegibility;
 }
 
 /**
- * Reset font-weight of heading elements
+ * Reset font-weight of header elements
  */
 
 h1,
@@ -36,6 +39,25 @@ h4,
 h5,
 h6 {
   font-weight: $font-weight-default;
+}
+
+/**
+ * Reset the margin of these elements.
+ */
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figure,
+p,
+pre {
+  margin: 0;
 }
 
 /**

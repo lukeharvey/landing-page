@@ -18,3 +18,16 @@
   position: absolute;
   width: 1px;
 }
+
+/**
+ * A clearfix solution
+ */
+
+.u-clearfix {
+
+  &::after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+}

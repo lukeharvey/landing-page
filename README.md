@@ -6,15 +6,15 @@ Landing Page
 ### Install pre-requisites
 
 - [Node.js](http://nodejs.org/) `brew install node`
-- Gulp `$ npm install -g gulp`
+- [Gulp](http://gulpjs.com/) `$ npm install -g gulp`
 
 ### Optionally install linters globally
-- ESLint `$ npm install -g eslint`
-- Stylelint `$ npm install -g stylelint`
+- [ESLint](http://eslint.org/) `$ npm install -g eslint`
+- [Stylelint](https://stylelint.io/) `$ npm install -g stylelint`
 
 ### Setup
 ```
-$ git clone https://bitbucket.com/lukeharvey/landing-page.git
+$ git clone https://github.com/lukeharvey/landing-page.git
 $ cd landing-page
 $ npm install
 ```
