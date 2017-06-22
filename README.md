@@ -5,18 +5,19 @@ Landing Page
 
 ### Install pre-requisites
 
-- [Node.js](http://nodejs.org/) `brew install node`
-- [Gulp](http://gulpjs.com/) `$ npm install -g gulp`
+- [Node.js](https://nodejs.org/) `$ brew install node`
+- [Yarn](https://yarnpkg.com/) `$ brew install yarn`
+- [Gulp](http://gulpjs.com/) `$ yarn global add gulp`
 
 ### Optionally install linters globally
-- [ESLint](http://eslint.org/) `$ npm install -g eslint`
-- [Stylelint](https://stylelint.io/) `$ npm install -g stylelint`
+- [ESLint](http://eslint.org/) `$ yarn global add eslint`
+- [Stylelint](https://stylelint.io/) `$ yarn global add stylelint`
 
 ### Setup
 ```
 $ git clone https://github.com/lukeharvey/landing-page.git
 $ cd landing-page
-$ npm install
+$ yarn install
 ```
 
 ## Developing
@@ -26,6 +27,9 @@ $ gulp build
 
 # Start live reload server with automatic asset compilation
 $ gulp serve
+
+# Check code against linters
+$ gulp lint
 
 # List other available gulp tasks
 $ gulp help

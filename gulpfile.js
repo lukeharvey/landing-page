@@ -21,28 +21,62 @@ var browserSync = require('browser-sync').create();
  */
 
 gulp.task('help', $.taskListing);
+gulp.task('default', ['help']);
 
 /**
- * Sass
+ * Build Sass
  *
  * Complie and minify the Sass files and auto-inject into browsers
  */
 
-gulp.task('sass', function() {
-  log('Processing the main Sass file');
-
+gulp.task('build-sass', function() {
   return gulp.src(['./src/sass/main.scss'])
     .pipe($.sourcemaps.init())
-    .pipe($.sass({
-      precision: 10
-    }).on('error', $.sass.logError))
-    .pipe($.autoprefixer({browsers: ['last 2 versions']}))
-    .pipe($.cssnano())
-    .pipe($.rename('main.min.css'))
-    .pipe($.size({title: 'styles'}))
+      .pipe($.sass({
+        precision: 10
+      }).on('error', $.sass.logError))
+      .pipe($.autoprefixer({browsers: ['last 2 versions']}))
+      .pipe($.cssnano())
+      .pipe($.rename('main.min.css'))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/css/'))
     .pipe(browserSync.stream({match: '**/*.css'}));
+});
+
+/**
+ * Build JS
+ *
+ * Concat and minify the JavaScript files
+ */
+
+gulp.task('build-js', function() {
+  return gulp.src(['./src/js/vendor/*.js', './src/js/modules/*.js'])
+    .pipe($.sourcemaps.init())
+      .pipe($.concat('main.min.js'))
+      .pipe($.uglify({preserveComments: 'some'}))
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('./dist/js/'));
+});
+
+/**
+ * Clean
+ *
+ * Clean the dist assets folder
+ */
+
+gulp.task('clean', function () {
+  return gulp.src('dist/*', {read: false})
+    .pipe($.clean());
+});
+
+/**
+ * Build
+ *
+ * Build everything
+ */
+
+gulp.task('build', function(done) {
+  return runSequence('clean', ['build-sass', 'build-js'], done);
 });
 
 /**
@@ -52,31 +86,11 @@ gulp.task('sass', function() {
  */
 
 gulp.task('lint-sass', function lintCssTask() {
-  log('Linting the Sass files');
-
   return gulp.src('src/sass/**/*.scss')
     .pipe($.stylelint({
       reporters: [{formatter: 'string', console: true}],
       syntax: "scss"
     }));
-});
-
-/**
- * JS
- *
- * Concat and minify the JavaScript files
- */
-
-gulp.task('js', function() {
-  log('Processing the JavaScript files');
-
-  return gulp.src(['./src/js/vendor/*.js', './src/js/modules/*.js'])
-    .pipe($.sourcemaps.init())
-    .pipe($.concat('main.min.js'))
-    .pipe($.uglify({preserveComments: 'some'}))
-    .pipe($.size({title: 'scripts'}))
-    .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest('./dist/js/'));
 });
 
 /**
@@ -86,8 +100,6 @@ gulp.task('js', function() {
  */
 
 gulp.task('lint-js', function() {
-  log('Linting the JavaScript files');
-
   return gulp.src(['./src/js/modules/*.js'])
     .pipe($.eslint())
     .pipe($.eslint.format())
@@ -101,17 +113,7 @@ gulp.task('lint-js', function() {
  */
 
 gulp.task('lint', function(done) {
-  runSequence('lint-js', 'lint-sass', done);
-});
-
-/**
- * Build
- *
- * Build everything
- */
-
-gulp.task('build', function(done) {
-  runSequence('sass', 'js', done);
+  return runSequence('lint-sass', 'lint-js', done);
 });
 
 /**
@@ -120,34 +122,17 @@ gulp.task('build', function(done) {
  * Run a Browsersync server and watch all the files.
  */
 
-gulp.task('serve', ['sass', 'js'], function() {
+gulp.task('serve', function() {
+  return runSequence('build', function() {
+    browserSync.init({
+      server: {
+        baseDir: "./"
+      },
+      notify: false
+    });
 
-  browserSync.init({
-    server: {
-      baseDir: "./"
-    },
-    notify: false
+    gulp.watch(['./src/sass/**/*.scss'], ['build-sass']);
+    gulp.watch(['./src/js/**/*.js'], ['build-js', browserSync.reload]);
+    gulp.watch(['./**/*.html']).on('change', browserSync.reload);
   });
-
-  gulp.watch(['./src/sass/**/*.scss'], ['sass']);
-  gulp.watch(['./src/js/**/*.js'], ['js', browserSync.reload]);
-  gulp.watch(['./**/*.html']).on('change', browserSync.reload);
-
 });
-
-/**
- * Log a message or series of messages using chalk's blue color.
- * Can pass in a string, object or array.
- */
-
-var log = function(msg) {
-  if (typeof(msg) === 'object') {
-    for (var item in msg) {
-      if (msg.hasOwnProperty(item)) {
-        $.util.log($.util.colors.blue(msg[item]));
-      }
-    }
-  } else {
-    $.util.log($.util.colors.blue(msg));
-  }
-};
