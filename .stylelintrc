@@ -1,5 +1,5 @@
 {
-  "extends": "stylelint-config-suitcss",
+  "extends": ["stylelint-config-suitcss", "stylelint-prettier/recommended"],
   "rules": {
     "at-rule-name-case": "lower",
     "at-rule-name-space-after": "always-single-line",
@@ -23,7 +23,6 @@
       "resolveNestedSelectors": true
     } ],
     "selector-max-empty-lines": 0,
-    "selector-no-id": true,
     "selector-no-qualifying-type": true,
     "selector-pseudo-class-case": "lower",
     "selector-pseudo-class-no-unknown": true,
