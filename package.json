@@ -37,7 +37,8 @@
     "sanitize.css": "^11.0.0",
     "stylelint": "^11.0.0",
     "stylelint-config-prettier": "^5.2.0",
-    "stylelint-config-suitcss": "^14.0.0"
+    "stylelint-config-suitcss": "^14.0.0",
+    "stylelint-prettier": "^1.1.1"
   },
   "main": "gulpfile.js",
   "scripts": {
